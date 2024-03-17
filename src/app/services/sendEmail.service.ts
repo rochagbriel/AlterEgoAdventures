@@ -42,7 +42,30 @@ export class EmailService {
           return throwError(error);
         })
       )
-      .subscribe((x) => {
+      .subscribe(() => {
+        this.toastr.success(
+          'You are all set!',
+          'You will receive an email soon.'
+        );
+      });
+  }
+
+  sendEmailToLambda(emailData: any) {
+    const url =
+      'https://cbwqx9au58.execute-api.eu-north-1.amazonaws.com/testing/sendEmailToAlterEgo';
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http
+      .post(url, emailData, { headers })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.toastr.error(
+            'Please contact us via email to continue.',
+            'An error occured.'
+          );
+          return throwError(error);
+        })
+      )
+      .subscribe(() => {
         this.toastr.success(
           'You are all set!',
           'You will receive an email soon.'

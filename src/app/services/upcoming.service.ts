@@ -16,7 +16,6 @@ export class UpcomingService {
   public upcomingData$: Observable<any[]> =
     this.upcomingDataSubject.asObservable();
 
-
   constructor(private http: HttpClient) {
     this.loadUpcomingData();
   }
@@ -41,9 +40,9 @@ export class UpcomingService {
       Authorization: `Bearer ${this.token}`,
     });
 
-    return this.http.get<Data>(environment.apiUrl + id, { headers }).pipe(
-      map(data => data['records']) 
-    );
+    return this.http
+      .get<Data>(environment.apiUrl + id, { headers })
+      .pipe(map((data) => data['records']));
   }
 
   getUpcomingData(): Observable<any[]> {
@@ -55,6 +54,4 @@ export class UpcomingService {
       map((dataArray) => dataArray.find((item) => item.id === id))
     );
   }
-
- 
 }

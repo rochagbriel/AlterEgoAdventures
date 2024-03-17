@@ -27,4 +27,5 @@ export interface Expedition {
   additional_pictures: string;
   disclaimer: string;
   included_list: string;
+  bronze_payment_link: string;
 }

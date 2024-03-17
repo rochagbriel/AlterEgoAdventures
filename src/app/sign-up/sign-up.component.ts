@@ -35,7 +35,7 @@ export class SignUpComponent {
       jumps: new FormControl('', Validators.required),
       referral: new FormControl(''),
       tripId: new FormControl('', Validators.required),
-      package: new FormControl('', Validators.required),
+      package: new FormControl('bronze (5)', Validators.required),
       discipline: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl(''), // Validators for phone number required
@@ -44,19 +44,21 @@ export class SignUpComponent {
       dates: new FormControl(''),
     });
 
-    /*  this.signUpForm = new FormGroup({
-      name: new FormControl(''),
+    /*
+    this.signUpForm = new FormGroup({
+      name: new FormControl('Theresa'),
       jumps: new FormControl(''),
       referral: new FormControl(''),
       tripId: new FormControl(''),
       package: new FormControl(''),
       discipline: new FormControl(''),
-      email: new FormControl(''),
+      email: new FormControl('theresa.tobollik@gmail.com'),
       phone: new FormControl(''), // Validators for phone number required
       comments: new FormControl(''),
       policiesRead: new FormControl(false),
       dates: new FormControl(''),
-    }); */
+    });
+        */
   }
 
   onSubmit() {
@@ -82,7 +84,11 @@ export class SignUpComponent {
                 )
               : '-',
           };
-          this.emailService.sendEmail(formValues);
+          this.emailService.sendEmailToLambda(formValues);
+          if (formValues.package === 'bronze (5)') {
+            window.open(trip?.fields.bronze_payment_link, '_blank');
+          }
+
           this.activeModal.close();
         });
     }

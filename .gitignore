@@ -43,4 +43,4 @@ testem.log
 Thumbs.db
 
 # Files to ignore
-src/environments/environment.ts
+src/environments/environment.local.ts
