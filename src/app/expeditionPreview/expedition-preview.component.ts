@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UpcomingService } from '../services/upcoming.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './expedition-preview.component.scss',
 })
 export class ExpeditionPreviewComponent {
-  upcomingData$: Observable<any> = this.upcomingService.getUpcomingData();
+  upcomingData$: Observable<any> = this.upcomingService.loadedUpcomingData;
 
   constructor(
     private upcomingService: UpcomingService,

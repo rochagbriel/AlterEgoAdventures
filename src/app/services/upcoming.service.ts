@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Data } from '@angular/router';
 import { Record } from '../models/expedition.models';
@@ -16,11 +16,11 @@ export class UpcomingService {
   public upcomingData$: Observable<any[]> =
     this.upcomingDataSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.loadUpcomingData();
-  }
+  loadedUpcomingData: Observable<any> = this.loadDataWithoutSubscription();
 
-  private loadUpcomingData() {
+  constructor(private http: HttpClient) {}
+
+  public loadUpcomingData() {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
@@ -33,6 +33,16 @@ export class UpcomingService {
         })
       )
       .subscribe();
+  }
+
+  private loadDataWithoutSubscription() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this.http
+      .get<Data>(this.apiUrl, { headers })
+      .pipe(switchMap((x) => [x['records']]));
   }
 
   public loadUpcomingPictures(id: string) {

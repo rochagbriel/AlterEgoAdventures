@@ -19,10 +19,12 @@
         <p class="lead description">{{ item?.fields?.short_description }}</p>
         <h2 class="m-2">
           {{
-            getDateRangeDisplay(
-              item?.fields?.start_date,
-              item?.fields?.end_date
-            )
+            item?.fields?.start_date
+              ? getDateRangeDisplay(
+                  item?.fields?.start_date,
+                  item?.fields?.end_date
+                )
+              : "To be announced"
           }}
         </h2>
       </div>

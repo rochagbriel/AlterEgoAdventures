@@ -50,7 +50,7 @@ export class EmailService {
       });
   }
 
-  sendEmailToLambda(emailData: any) {
+  sendEmailToLambda(emailData: any, link: string) {
     const url =
       'https://cbwqx9au58.execute-api.eu-north-1.amazonaws.com/testing/sendEmailToAlterEgo';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -66,10 +66,15 @@ export class EmailService {
         })
       )
       .subscribe(() => {
+        if (emailData.package === 'bronze (5)') {
+          window.open(link, '_blank');
+        }
+
         this.toastr.success(
           'You are all set!',
           'You will receive an email soon.'
         );
+        return true;
       });
   }
 }

@@ -84,10 +84,10 @@ export class SignUpComponent {
                 )
               : '-',
           };
-          this.emailService.sendEmailToLambda(formValues);
-          if (formValues.package === 'bronze (5)') {
-            window.open(trip?.fields.bronze_payment_link, '_blank');
-          }
+          this.emailService.sendEmailToLambda(
+            formValues,
+            trip?.fields.bronze_payment_link ?? ''
+          );
 
           this.activeModal.close();
         });
