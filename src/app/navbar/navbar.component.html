@@ -38,7 +38,7 @@
             Up Next
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu>
-            <li *ngFor="let item of upcomingData">
+            <li *ngFor="let item of upcomingData$ | async">
               <a href="./expedition/{{ item.id }}" class="dropdown-item">{{
                 item?.fields?.title
               }}</a>
@@ -99,7 +99,7 @@
             Up Next
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu>
-            <li *ngFor="let item of upcomingData">
+            <li *ngFor="let item of upcomingData$ | async">
               <a href="./expedition/{{ item.id }}" class="dropdown-item">{{
                 item?.fields?.title
               }}</a>

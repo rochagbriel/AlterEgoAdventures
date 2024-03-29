@@ -13,20 +13,14 @@ import { ModalService } from '../services/modal.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   isCollapsed = false;
-  upcomingData: any = {};
+  upcomingData$ = this.upcomingService.loadedUpcomingData;
 
   constructor(
     private upcomingService: UpcomingService,
     private modalService: ModalService
   ) {}
-
-  ngOnInit(): void {
-    this.upcomingService.getUpcomingData().subscribe((data) => {
-      this.upcomingData = data;
-    });
-  }
 
   openModal(): void {
     this.modalService.openModal();

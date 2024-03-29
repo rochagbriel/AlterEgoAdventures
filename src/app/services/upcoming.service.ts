@@ -13,7 +13,7 @@ export class UpcomingService {
   private token = environment.apiKey;
 
   private upcomingDataSubject = new BehaviorSubject<any[]>([]);
-  public upcomingData$: Observable<any[]> =
+  public upcomingData$: Observable<Record[]> =
     this.upcomingDataSubject.asObservable();
 
   loadedUpcomingData: Observable<any> = this.loadDataWithoutSubscription();
@@ -60,8 +60,8 @@ export class UpcomingService {
   }
 
   getRecordById(id: string): Observable<Record | undefined> {
-    return this.upcomingData$.pipe(
-      map((dataArray) => dataArray.find((item) => item.id === id))
+    return this.loadedUpcomingData.pipe(
+      map((dataArray) => dataArray.find((item: Record) => item.id === id))
     );
   }
 }

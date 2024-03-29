@@ -4,11 +4,12 @@
       <h1 class="ethnocentric">{{ expedition.fields.title }}</h1>
       <h2>
         {{
-           expedition.fields.start_date ? 
-          getDateRangeDisplay(
-            expedition.fields.start_date,
-            expedition.fields.end_date
-          ) : 'To be announced'
+          expedition.fields.start_date
+            ? getDateRangeDisplay(
+                expedition.fields.start_date,
+                expedition.fields.end_date
+              )
+            : "To be announced"
         }}
       </h2>
 
@@ -18,7 +19,7 @@
       ></div>
     </div>
 
-    <ngb-carousel>
+    <ngb-carousel *ngIf="pictures$ | async">
       <ng-template ngbSlide *ngFor="let picture of pictures$ | async">
         <div class="picsum-img-wrapper">
           <img [src]="picture.fields.src" alt="Random first slide" />

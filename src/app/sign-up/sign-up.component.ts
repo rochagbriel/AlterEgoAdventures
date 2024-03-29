@@ -94,7 +94,7 @@ export class SignUpComponent {
     }
   }
 
-  upcomingData$: Observable<any> = this.upcomingService.getUpcomingData();
+  upcomingData$: Observable<any> = this.upcomingService.loadedUpcomingData;
 
   dismiss() {
     this.activeModal.dismiss();

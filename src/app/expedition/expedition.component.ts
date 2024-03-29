@@ -52,7 +52,7 @@ export class ExpeditionComponent {
           expedition.fields.additional_pictures
         );
       } else {
-        return of(null); // TODO add some fallback picture
+        return of(null); 
       }
     })
   );
