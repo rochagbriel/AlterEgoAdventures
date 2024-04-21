@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { FaqService } from '../services/faq.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';

@@ -43,25 +43,13 @@ export class SignUpComponent {
       //policiesRead: new FormControl(false, Validators.required),
       dates: new FormControl(''),
     });
-
-    /*
-    this.signUpForm = new FormGroup({
-      name: new FormControl('Theresa'),
-      jumps: new FormControl(''),
-      referral: new FormControl(''),
-      tripId: new FormControl(''),
-      package: new FormControl(''),
-      discipline: new FormControl(''),
-      email: new FormControl('theresa.tobollik@gmail.com'),
-      phone: new FormControl(''), // Validators for phone number required
-      comments: new FormControl(''),
-      policiesRead: new FormControl(false),
-      dates: new FormControl(''),
-    });
-        */
   }
 
   onSubmit() {
+    this.signUpForm.markAllAsTouched();
+    if (!this.signUpForm.valid) {
+      return;
+    }
     if (this.signUpForm.valid) {
       this.upcomingService
         .getRecordById(this.signUpForm.value.tripId)
@@ -77,12 +65,7 @@ export class SignUpComponent {
             phone: this.signUpForm.value.phone,
             comments: this.signUpForm.value.comments,
             policiesRead: this.signUpForm.value.policiesRead,
-            dates: trip
-              ? this.formatTripDates(
-                  trip?.fields.start_date,
-                  trip?.fields.end_date
-                )
-              : '-',
+            dates: trip?.fields.dates,
           };
           this.emailService.sendEmailToLambda(
             formValues,

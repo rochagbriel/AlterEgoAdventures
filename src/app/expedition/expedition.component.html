@@ -3,14 +3,7 @@
     <div class="main-layout">
       <h1 class="ethnocentric">{{ expedition.fields.title }}</h1>
       <h2>
-        {{
-          expedition.fields.start_date
-            ? getDateRangeDisplay(
-                expedition.fields.start_date,
-                expedition.fields.end_date
-              )
-            : "To be announced"
-        }}
+        {{ expedition.fields.dates }}
       </h2>
 
       <div

@@ -9,13 +9,12 @@ import { of, switchMap } from 'rxjs';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { ParagraphPipe } from '../pipes/paragraph.pipe';
 
 @Component({
   selector: 'app-expedition',
   standalone: true,
-  providers: [UpcomingService, DatePipe],
+  providers: [UpcomingService],
   imports: [
     NgbAccordionModule,
     CommonModule,
@@ -30,8 +29,7 @@ export class ExpeditionComponent {
   constructor(
     private upcomingService: UpcomingService,
     private route: ActivatedRoute,
-    private router: Router,
-    private datePipe: DatePipe
+    private router: Router
   ) {}
 
   expedition$ = this.route.paramMap.pipe(
@@ -52,23 +50,8 @@ export class ExpeditionComponent {
           expedition.fields.additional_pictures
         );
       } else {
-        return of(null); 
+        return of(null);
       }
     })
   );
-
-  getDateRangeDisplay(startDateString: Date, endDateString: Date): string {
-    let startDate = new Date(startDateString);
-    let endDate = new Date(endDateString);
-    const startFormat = 'dd';
-    const endFormat =
-      startDate.getMonth() === endDate.getMonth() &&
-      startDate.getFullYear() === endDate.getFullYear()
-        ? 'dd MMMM yyyy'
-        : 'dd MMMM yyyy';
-    return `${this.datePipe.transform(
-      startDate,
-      startFormat
-    )} - ${this.datePipe.transform(endDate, endFormat)}`;
-  }
 }

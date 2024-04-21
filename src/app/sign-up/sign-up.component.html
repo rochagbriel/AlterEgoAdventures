@@ -82,7 +82,16 @@
         id="jumps"
         formControlName="jumps"
         placeholder="Enter your total number of jumps..."
+        min="1"
       />
+      <div
+        class="invalid"
+        *ngIf="
+          signUpForm.get('jumps')?.invalid && signUpForm.get('jumps')?.touched
+        "
+      >
+        Enter a number higher than 0.
+      </div>
     </div>
 
     <div class="form-group">
@@ -111,7 +120,9 @@
       />
       <div
         class="invalid"
-        *ngIf="signUpForm.get('ame')?.invalid && signUpForm.get('ame')?.touched"
+        *ngIf="
+          signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched
+        "
       >
         Full name is required.
       </div>
@@ -183,12 +194,6 @@
       </label>
     </div> -->
 
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="!signUpForm.valid"
-    >
-      Sign Up
-    </button>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
   </form>
 </div>

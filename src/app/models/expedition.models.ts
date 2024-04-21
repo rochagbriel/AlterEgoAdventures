@@ -12,14 +12,13 @@ export interface Expedition {
   short_description: string;
   long_description: string;
   description: string;
-  end_date: Date;
   idv: number;
   location: string;
   main_picture: any;
   price_bronze: string;
   price_gold: string;
   price_silver: '4000';
-  start_date: Date;
+  dates: string;
   title: string;
   bronze_description: string;
   silver_description: string;
